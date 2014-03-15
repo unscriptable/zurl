@@ -16,5 +16,8 @@
     "loader"
   ],
   "author": "unscriptable <john@unscriptable.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+	  "buster": "~0.6"
+  }
 }
