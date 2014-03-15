@@ -1,0 +1,20 @@
+{
+  "name": "zurl",
+  "version": "0.0.1",
+  "description": "Zip-Archive (aka \"Zip Url\") shim.",
+  "main": "index.js",
+  "scripts": {
+    "test": "buster test"
+  },
+  "keywords": [
+    "amd",
+    "node",
+    "es6",
+    "module",
+    "bundle",
+    "zip",
+    "loader"
+  ],
+  "author": "unscriptable <john@unscriptable.com>",
+  "license": "MIT"
+}
