@@ -2,7 +2,7 @@
   "name": "zurl",
   "version": "0.0.1",
   "description": "Zip-Archive (aka \"Zip Url\") shim.",
-  "main": "index.js",
+  "main": "zurl.js",
   "scripts": {
     "test": "buster test"
   },

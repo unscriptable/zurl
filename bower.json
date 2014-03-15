@@ -5,7 +5,7 @@
     "unscriptable <john@unscriptable.com>"
   ],
   "description": "Zip-Archive (aka \"Zip Url\") shim.",
-  "main": "index.js",
+  "main": "zurl.js",
   "moduleType": [
     "node"
   ],
