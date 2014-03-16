@@ -4,10 +4,13 @@
 
 var defaultParser = require('./lib/zipUrl').parse;
 var defaultCache = require('./lib/memoryCache').get;
-var defaultFinder = require('./lib/xhrFinder');
+var defaultFinder = require('./lib/findViaXhr');
+var defaultExtract = require('./lib/extractFlat');
+var defaultHydrate = require('./lib/hydrateFromText');
 var ZurlFile = require('./lib/ZurlFile');
 
-module.exports = fetchFile;
+
+module.exports = zurl;
 
 /**
  * Creates a function that will find the zurl file for a zipUrl.  Since the
@@ -19,17 +22,22 @@ module.exports = fetchFile;
  * @param {function(url:string):object} parseUrl - a function that will
  * dissect a zip url into parts and returns an object with the important
  * parts: the rootUrl of the zip and the filePath within the zip.
+ * @param hydrateZurl
+ * @param extractFile
  * @returns {function(zipUrl:string):Promise}
  */
-function fetchFile (findZurl, parseUrl) {
+function zurl (findZurl, parseUrl, hydrateZurl, extractFile) {
 
 	if (!parseUrl) parseUrl = defaultParser;
 	if (!findZurl) findZurl = defaultCache(defaultFinder);
+	if (!hydrateZurl) hydrateZurl = defaultHydrate;
+	if (!extractFile) extractFile = defaultExtract;
 
 	return function (zipUrl) {
 		var parts = parseUrl(zipUrl);
 		return findZurl(parts.rootUrl).then(function (zurlFile) {
-			return new ZurlFile(zurlFile).read(parts.filePath);
+			zurlFile = hydrateZurl(zurlFile);
+			return new ZurlFile(zurlFile, extractFile).read(parts.filePath);
 		});
 	};
 }
